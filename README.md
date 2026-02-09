@@ -72,7 +72,7 @@ As a **Tech Lead**, this repository highlights:
 ---
 
 ## 👤 Author
-**Your Name / GitHub Profile**
+**Your Diego Felipe Garcia Ortega / GitHub Profile https://github.com/diegofgarciao**
 * *Role:* Tech Lead / Senior Frontend Engineer
 * *Purpose:* Demonstrating architectural mastery across the Angular ecosystem.
 
