@@ -1,0 +1,139 @@
+<div *ngIf="loading; else content" style="text-align: center; padding: 50px">
+  <h2>Cargando inventario legacy...</h2>
+  <div class="spinner"></div>
+</div>
+
+<ng-template #content>
+  <div class="dashboard-container">
+    <div class="welcome-banner">
+      <h2>¡Hola de nuevo, Coleccionista! 👋</h2>
+      <p>Tu inventario ha crecido un <strong>8.4%</strong> este mes.</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="label">TOTAL CÓMICS</span>
+        <div class="value">{{ stats?.totalComics }}</div>
+      </div>
+
+      <div class="stat-card">
+        <span class="label">VALOR ESTIMADO</span>
+        <div class="value">{{ stats?.estimatedValue | currency: "EUR" }}</div>
+      </div>
+
+      <div class="stat-card">
+        <span class="label">LEÍDOS</span>
+        <div class="value">{{ stats?.readCount }}</div>
+      </div>
+
+      <div class="stat-card">
+        <span class="label">LISTA DE DESEOS</span>
+        <div class="value">{{ stats?.wishlistCount }}</div>
+      </div>
+    </div>
+
+    <ng-template #loader>
+      <div class="loader">Cargando Dashboard Legacy...</div>
+    </ng-template>
+
+    <div class="main-content">
+      <div class="chart-container">
+        <h3>Crecimiento del Inventario</h3>
+        <p>Volumen de cómics en los últimos 7 meses</p>
+        <div class="bar-chart">
+          <div *ngFor="let item of stats?.chartData" class="bar-wrapper">
+            <div class="bar" [style.height.%]="item.value"></div>
+            <span class="month-label">{{ item.month }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="activity-container">
+        <h3>Actividad Reciente</h3>
+        <div class="timeline">
+          <div *ngFor="let act of stats?.activities" class="activity-item">
+            <div class="dot" [ngClass]="act.type"></div>
+            <div class="text">
+              <p class="act-title">{{ act.title }}</p>
+              <p class="act-date">{{ act.date }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-charts">
+      <div class="chart-card">
+        <h3>Distribución por Editorial</h3>
+        <div class="donut-chart-wrapper">
+          <svg width="150" height="150" viewBox="0 0 42 42" class="donut">
+            <circle
+              class="donut-hole"
+              cx="21"
+              cy="21"
+              r="15.915"
+              fill="#fff"
+            ></circle>
+            <circle
+              class="donut-ring"
+              cx="21"
+              cy="21"
+              r="15.915"
+              fill="transparent"
+              stroke="#eeeeee"
+              stroke-width="3"
+            ></circle>
+
+            <circle
+              class="donut-segment"
+              cx="21"
+              cy="21"
+              r="15.915"
+              fill="transparent"
+              stroke="#3498db"
+              stroke-width="3"
+              stroke-dasharray="40 60"
+              stroke-dashoffset="25"
+            ></circle>
+
+            <circle
+              class="donut-segment"
+              cx="21"
+              cy="21"
+              r="15.915"
+              fill="transparent"
+              stroke="#f1c40f"
+              stroke-width="3"
+              stroke-dasharray="30 70"
+              stroke-dashoffset="85"
+            ></circle>
+          </svg>
+          <div class="chart-legend">
+            <p><span class="dot marvel"></span> Marvel</p>
+            <p><span class="dot dc"></span> DC</p>
+            <p><span class="dot others"></span> Otros</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Valor de la Colección</h3>
+        <div class="area-chart-wrapper">
+          <svg viewBox="0 0 200 100" class="area-chart">
+            <polygon
+              points="0,100 0,80 40,75 80,60 120,55 160,40 200,30 200,100"
+              fill="rgba(46, 204, 113, 0.2)"
+            />
+            <polyline
+              points="0,80 40,75 80,60 120,55 160,40 200,30"
+              fill="none"
+              stroke="#2ecc71"
+              stroke-width="2"
+            />
+          </svg>
+          <div class="price-indicator">€8000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
