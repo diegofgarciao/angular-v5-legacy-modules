@@ -1,5 +1,8 @@
-<div style="text-align:center">
-      <h1>Bienvenido a ComicVault v5</h1>
-      <legacy-dashboard></legacy-dashboard>
-      <!-- <legacy-comic-list></legacy-comic-list> -->
-    </div>
+<div style="display: flex;">
+  <app-sidebar #sidebarComponent></app-sidebar>
+  
+  <main [style.marginLeft]="sidebarComponent.isCollapsed ? '70px' : '250px'" 
+        style="flex-grow: 1; transition: margin 0.3s ease;">
+    <router-outlet></router-outlet>
+  </main>
+</div>
