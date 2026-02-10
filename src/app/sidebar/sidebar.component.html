@@ -1,0 +1,34 @@
+<div class="sidebar" [ngClass]="{'collapsed': isCollapsed}">
+  <div class="logo-section">
+    <div class="burger" (click)="toggleSidebar()">
+      <span></span><span></span><span></span>
+    </div>
+    <h1 *ngIf="!isCollapsed">COMIC<span>HUB</span></h1>
+  </div>
+
+  <nav class="menu">
+    <p class="section-title" *ngIf="!isCollapsed">MENÚ PRINCIPAL</p>
+    <ul>
+      <li routerLink="/dashboard" routerLinkActive="active">
+        <i class="icon-dashboard"></i> 
+        <span *ngIf="!isCollapsed">Dashboard</span>
+      </li>
+      <li routerLink="/library" routerLinkActive="active">
+        <i class="icon-library"></i> 
+        <span *ngIf="!isCollapsed">Biblioteca</span>
+      </li>
+      <li routerLink="/settings" routerLinkActive="active">
+        <i class="icon-settings"></i> 
+        <span *ngIf="!isCollapsed">Configuración</span>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="profile-section">
+    <div class="avatar"></div>
+    <div class="user-info" *ngIf="!isCollapsed">
+      <p class="name">{{ userAdmin.name }}</p>
+      <p class="edition">{{ userAdmin.edition }}</p>
+    </div>
+  </div>
+</div>
