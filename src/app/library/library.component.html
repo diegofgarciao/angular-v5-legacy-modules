@@ -1,0 +1,53 @@
+<div class="library-container">
+  
+  <section class="genres-panel">
+    <div class="genres-grid">
+      <span>AfterShock (3)</span>
+      <span>DC Comics (153)</span>
+      <span>Marvel Comics (180)</span>
+      <span>Image Comics (66)</span>
+      <span>Indies (108)</span>
+      <span>Vertigo (2)</span>
+    </div>
+  </section>
+
+  <h2 style="font-weight: 300; margin-bottom: 20px;">Todos los cómics</h2>
+
+  <div class="sort-bar">
+    <span style="font-weight: bold; font-size: 14px;">★ {{ comics.length }} RESULTADOS</span>
+    <div class="sort-options" style="font-size: 13px; color: #888;">
+      <span style="margin-right: 10px;">Ordenar por:</span>
+      <a style="margin: 0 5px; cursor: pointer; color: #333; font-weight: bold;">Mas reciente</a>
+      <a style="margin: 0 5px; cursor: pointer;">A-Z</a>
+      <a style="margin: 0 5px; cursor: pointer;">Calificación</a>
+      <a style="margin: 0 5px; cursor: pointer;">Trending</a>
+    </div>
+  </div>
+
+  <div class="comics-grid">
+    <div class="comic-card" *ngFor="let comic of comics">
+      <div class="cover-wrapper">
+        <img [src]="comic.cover" [alt]="comic.title" />
+        <span class="chapter-tag">Chapter {{ comic.chapter }}</span>
+      </div>
+
+      <div class="comic-info">
+        <span class="age-rating" *ngIf="comic.id === 1" 
+              style="color: #e74c3c; font-size: 10px; font-weight: bold; border: 1px solid; padding: 0 2px; border-radius: 3px;">
+          18+
+        </span>
+        
+        <h3 class="comic-title">{{ comic.title }}</h3>
+
+        <div class="rating" style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
+          <span class="stars" style="color: #f1c40f; font-size: 12px;">★★★★★</span>
+          <span class="score" style="font-size: 12px; font-weight: bold; color: #555;">{{ comic.rating }}</span>
+        </div>
+
+        <p class="comic-subtitle" style="font-size: 12px; color: #777; margin: 0;">{{ comic.title }} #{{ comic.chapter }}</p>
+        <span class="date-tag" style="font-size: 11px; color: #aaa;">{{ comic.date }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>
