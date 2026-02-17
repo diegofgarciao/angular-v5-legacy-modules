@@ -104,3 +104,59 @@
 .comic-info {
   padding: 5px 0;
 }
+
+/* Estilo del botón de agregar */
+.btn-add-comic {
+  background-color: #1a2a3a; /* Azul oscuro para ir con la sidebar */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-add-comic:hover {
+  background-color: #2c3e50;
+}
+
+/* Modal Overlay */
+.add-comic-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Por encima de todo */
+}
+
+/* Caja del formulario */
+.form-content {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 350px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-content label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-content input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
