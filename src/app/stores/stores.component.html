@@ -1,0 +1,42 @@
+<div class="library-container">
+  <h2 class="main-title">Directorio de Tiendas Aliadas</h2>
+  <p class="subtitle">Encuentra los ejemplares más raros en nuestros puntos físicos autorizados.</p>
+
+  <div class="stores-list">
+    <div class="store-card" *ngFor="let store of stores">
+      <div class="store-image">
+        <img [src]="store.image" [alt]="store.name">
+        <span class="status-badge" [ngClass]="store.isOpen ? 'open' : 'closed'">
+          {{ store.isOpen ? 'ABIERTO' : 'CERRADO' }}
+        </span>
+      </div>
+      
+      <div class="store-details">
+        <h3>{{ store.name }}</h3>
+        <p class="address"><i class="icon-location"></i> {{ store.address }} - {{ store.city }}</p>
+        <p class="phone"><i class="icon-phone"></i> {{ store.phone }}</p>
+        
+        <div class="tags">
+          <span *ngFor="let tag of store.tags" class="tag">{{ tag }}</span>
+        </div>
+
+        <div class="actions">
+          <a [href]="store.website" target="_blank" class="btn-visit">Visitar Web</a>
+          <button class="btn-map">Ver en Mapa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-section">
+  <h3 style="margin-top: 40px;">Ubicación de Distribuidores</h3>
+  <div class="map-container">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.018287227814!2d-122.41941548468196!3d37.774929517174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4455%3A0x597241259e8790ad!2sComic+Experience!5e0!3m2!1sen!2s!4v1525350000000" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+</div>
+
+</div>
