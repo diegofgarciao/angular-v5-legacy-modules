@@ -25,12 +25,20 @@ export class LibraryComponent implements OnInit {
 
   saveComic() {
     if (this.newComic.title && this.newComic.cover) {
-      // Agregamos al inicio del array para que se vea primero
-      this.comics.unshift({ ...this.newComic, id: this.comics.length + 1 });
+      const comicToSave = { 
+        ...this.newComic, 
+        id: Date.now() // Usamos timestamp para ID único
+      };
+      
+      this.comicService.addComic(comicToSave);
+      
       this.isModalOpen = false;
-      // Reset del form
-      this.newComic = { title: '', chapter: 1, cover: '', rating: 5, date: 'Recién agregado' };
+      this.resetForm();
     }
+  }
+
+  private resetForm() {
+    this.newComic = { title: '', chapter: 1, cover: '', rating: 5, date: 'Recién agregado' };
   }
 
 }

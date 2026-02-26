@@ -1,12 +1,127 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http"; // El abuelo de HttpClient
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map"; // Importación obligatoria en RxJS 5
+import { Http } from "@angular/http";
+import "rxjs/add/operator/map";
 import "rxjs/add/operator/delay";
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class ComicService {
+  private STORAGE_KEY = 'my_comic_library';
+
+  private comicsSource = new BehaviorSubject<any[]>(this.loadInitialData());
+  currentComics = this.comicsSource.asObservable();
+
   constructor(private http: Http) {}
+
+  private loadInitialData() {
+    const saved = localStorage.getItem(this.STORAGE_KEY);
+    if (saved) {
+      return JSON.parse(saved);
+    }
+    
+    return [
+      {
+        id: 1,
+        title: "The Department of Truth",
+        chapter: 27,
+        rating: 4.9,
+        date: "3 días ago",
+        cover: "assets/tdotc1.jpeg",
+        genres: ["Image Comics"],
+        editorial: "Image",
+      },
+      {
+        id: 2,
+        title: "American Jesus: The New Messiah",
+        chapter: 1,
+        rating: 5,
+        date: "6 de febrero 2026",
+        cover: "assets/ajtnmc2.jpg",
+        genres: ["Indies"],
+        editorial: "Dark Horse",
+      },
+      {
+        id: 3,
+        title: "The Infernal Hulk",
+        chapter: 1,
+        rating: 5,
+        date: "5 de febrero 2026",
+        cover: "assets/tihc1.jpg",
+        genres: ["Marvel Comics"],
+        editorial: "Marvel",
+      },
+      {
+        id: 4,
+        title: "Carnage: Mind Bomb",
+        chapter: 1,
+        rating: 5,
+        date: "5 de febrero 2026",
+        cover: "assets/cmbc1.webp",
+        genres: ["Marvel Comics"],
+        editorial: "Marvel",
+      },
+      {
+        id: 5,
+        title: "DC K.O.",
+        chapter: 28,
+        rating: 4.6,
+        date: "4 de febrero 2026",
+        cover: "assets/dcko1.jpg",
+        genres: ["DC Comics"],
+        editorial: "DC",
+      },
+      {
+        id: 6,
+        title: "Justice League Unlimited",
+        chapter: 17,
+        rating: 4.8,
+        date: "4 de febrero 2026",
+        cover: "assets/jl1.jpg",
+        genres: ["DC Comics"],
+        editorial: "DC",
+      },
+      {
+        id: 7,
+        title: "Saga",
+        chapter: 60,
+        rating: 5.0,
+        date: "10 de febrero 2026",
+        cover: "assets/saga1.webp",
+        genres: ["Image Comics"],
+        editorial: "Image",
+      },
+      {
+        id: 8,
+        title: "Batman: Gargoyle of Gotham",
+        chapter: 2,
+        rating: 4.7,
+        date: "1 de febrero 2026",
+        cover: "assets/bgogc1.jpg",
+        genres: ["DC Comics", "DC Horror"],
+        editorial: "DC",
+      },
+      {
+        id: 9,
+        title: "Something is Killing the Children",
+        chapter: 35,
+        rating: 4.9,
+        date: "2 de febrero 2026",
+        cover: "assets/siktc1.webp",
+        genres: ["Boom Studios"],
+        editorial: "Boom",
+      },
+      {
+        id: 10,
+        title: "Ultimate Spider-Man (2024)",
+        chapter: 1,
+        rating: 5.0,
+        date: "7 de febrero 2026",
+        cover: "assets/usmc1.jpeg",
+        genres: ["Marvel Comics"],
+        editorial: "Marvel",
+      },
+    ];
+  }
 
   getDashboardStats(): Observable<any> {
     // Simulamos una llamada API. En 2017 no usábamos 'of' de la misma forma que hoy.
@@ -45,7 +160,7 @@ export class ComicService {
     });
   }
 
-  getComics(): Observable<any[]> {
+  /* getComics(): Observable<any[]> {
     const comics = [
       {
         id: 1,
@@ -155,5 +270,20 @@ export class ComicService {
         observer.complete();
       }, 500);
     });
+
+  } */
+
+  addComic(newComic: any) {
+    const currentList = this.comicsSource.value;
+    const updatedList = [newComic, ...currentList];
+    
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(updatedList));
+
+    this.comicsSource.next(updatedList);
   }
+
+  getComics(): Observable<any[]> {
+    return this.currentComics;
+  }
+
 }
